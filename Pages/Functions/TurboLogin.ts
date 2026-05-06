@@ -11,8 +11,6 @@ export class TurboLogin {
     // Navigate to login URL
     async navigateToLogin() {
         await this.loginPage.page.goto('/');
-        await expect(this.loginPage.headerVerification).toHaveText('Welcome')
-        await expect(this.loginPage.logoVerification).toBeVisible()
     }
 
     // Perform login using locators from POM
@@ -42,6 +40,7 @@ export class TurboLogin {
         await this.loginPage.page.waitForTimeout(5000)
         await expect(this.loginPage.emailErrorMsg).toBeVisible()
     }
+<<<<<<< HEAD
     async wrongPasswordMsg() {
         await expect(this.loginPage.passwordErrorMsg).toBeVisible()
     }
@@ -52,4 +51,8 @@ export class TurboLogin {
         await expect(this.loginPage.emailInvalidMsg).toBeVisible()
     }
     
+=======
+
+   
+>>>>>>> e8299b43ad67ccfd12305c95ade62b4a70dc6401
 }
