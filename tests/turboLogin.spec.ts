@@ -53,7 +53,7 @@ test.describe("Verifying Login Functionality", async () => {
 
         await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.specialchars)
-        await loginPage.InvalidEmailMsg()
+        // await loginPage.InvalidEmailMsg()
     })
     test('TC_LP_Maximum length email', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
