@@ -13,7 +13,8 @@ export class LoginPage {
   readonly passwordErrorMsg:Locator
   readonly passwordRequireMsg:Locator
   readonly continueBtn: Locator;
-
+  readonly EditBtn: Locator;
+  readonly resetLink: Locator;
   constructor(page: Page) {
     this.page= page
     this.logoVerification = page.locator('header[id="screen-header"]>img')
@@ -25,5 +26,7 @@ export class LoginPage {
     this.passwordErrorMsg = page.locator('span[id="error-element-password"]')
     this.passwordRequireMsg = page.locator('div[id="error-cs-password-required"]')
     this.continueBtn= page.getByText('Continue') 
+    this.EditBtn = page.locator('a[aria-label="Edit email address"]')
+    this.resetLink =  page.getByText('Reset password')
   }
 }

@@ -21,25 +21,35 @@ export class TurboLogin {
         await this.loginPage.continueBtn.last().click()
     }
     async PasswordFill(password: string) {
+        await expect(this.loginPage.headerVerification).toHaveText('Enter Your Password')
         await this.loginPage.PasswordInput.fill(password);
         await this.loginPage.continueBtn.last().click()
+    }
+    async EditLink() {
+        await this.loginPage.EditBtn.click()
+        await expect(this.loginPage.headerVerification).toHaveText('Welcome')
+    }
+      async ResetLink() {
+        await this.loginPage.resetLink.click()
+        await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
     }
     async assertDashboard() {
         await this.loginPage.page.waitForLoadState();
         await expect(this.loginPage.page).toHaveURL('https://test.turbocore.soais.com/dashboard');
         await expect(this.loginPage.page.getByText('Home')).toBeVisible()
     }
-    async EmailErrorMsg(){
+    async EmailErrorMsg() {
         await this.loginPage.page.waitForTimeout(5000)
         await expect(this.loginPage.emailErrorMsg).toBeVisible()
     }
-    async wrongPasswordMsg(){
+    async wrongPasswordMsg() {
         await expect(this.loginPage.passwordErrorMsg).toBeVisible()
     }
-    async passwordRequireMsg(){
+    async passwordRequireMsg() {
         await expect(this.loginPage.passwordRequireMsg).toBeVisible()
     }
-    async InvalidEmailMsg(){
+    async InvalidEmailMsg() {
         await expect(this.loginPage.emailInvalidMsg).toBeVisible()
     }
+    
 }

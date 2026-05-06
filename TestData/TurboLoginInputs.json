@@ -5,5 +5,8 @@
     "invalidMail":"maruthiprasad",
     "password":"Maruthi@1234",
     "worngPassword":"1233242",
-    "emptyPassword":""
+    "emptyPassword":"",
+    "specialchars":"$$$@soais.com",
+    "maxEmailLength" : "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADS@gmail.com",
+    "maxExeedEamil":"dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADSl@gmail.com"
 }

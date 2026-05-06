@@ -41,11 +41,45 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.PasswordFill(Data.emptyPassword)
         await loginPage.passwordRequireMsg()
     })
-    test.only('Log in Turbocore With invalid email', async ({ page }) => {
+    test('Log in Turbocore With invalid email', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
 
         await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.invalidMail)
         await loginPage.InvalidEmailMsg()
+    })
+    test('TC_LP_Special Email characters only', async ({ page }) => {
+        const loginPage = new TurboLogin(new LoginPage(page))
+
+        await loginPage.navigateToLogin()
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.InvalidEmailMsg()
+    })
+    test('TC_LP_Maximum length email', async ({ page }) => {
+        const loginPage = new TurboLogin(new LoginPage(page))
+
+        await loginPage.navigateToLogin()
+        await loginPage.emailFill(Data.maxEmailLength)
+        await loginPage.PasswordFill(Data.password)
+        // await loginPage.InvalidEmailMsg()
+    })
+    test('TC_LP_Email field Max limit exceed', async ({ page }) => {
+        const loginPage = new TurboLogin(new LoginPage(page))
+
+        await loginPage.navigateToLogin()
+        await loginPage.emailFill(Data.maxExeedEamil)
+        await loginPage.InvalidEmailMsg()
+    })
+    test('TC_LP_Verify Edit Email Functionality', async ({ page }) => {
+        const loginPage = new TurboLogin(new LoginPage(page))
+        await loginPage.navigateToLogin()
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.EditLink()
+    })
+        test('TC_LP_Verify "Reset Password" Link', async ({ page }) => {
+        const loginPage = new TurboLogin(new LoginPage(page))
+        await loginPage.navigateToLogin()
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.ResetLink()
     })
 })
