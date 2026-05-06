@@ -5,7 +5,7 @@ import { LoginPage } from "../Pages/locators/turboLoginPage"
 
 
 test.describe("Verifying Login Functionality", async () => {
-    test('Log in Turbocore With valid crede', async ({ page }) => {
+    test('Log in Turbocore With valid credentials', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
 
         await loginPage.navigateToLogin()
@@ -13,14 +13,13 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.PasswordFill(Data.password)
         await loginPage.assertDashboard()
     })
-    test.only('Log in Turbocore With empty email', async ({ page }) => {
+    test('Log in Turbocore With empty email', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
 
         await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.emptyEmail)
         await loginPage.EmailErrorMsg()
     })
-<<<<<<< HEAD
     test('Verifying Log in Turbocore With valid Email and invalid Password', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
         await loginPage.navigateToLogin()
@@ -77,12 +76,10 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.EditLink()
     })
-        test('TC_LP_Verify "Reset Password" Link', async ({ page }) => {
+    test('TC_LP_Verify "Reset Password" Link', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
         await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetLink()
     })
-=======
->>>>>>> e8299b43ad67ccfd12305c95ade62b4a70dc6401
 })
