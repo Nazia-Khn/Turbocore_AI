@@ -1,5 +1,9 @@
 {
     "Email":"maruthiprasad.pc@soais.com",
+    "emptyEmail":"",
+    "wrongEmail":"maruthiprasad@soais.com",
+    "invalidMail":"maruthiprasad",
     "password":"Maruthi@1234",
-    "emptyEmail":""
+    "worngPassword":"1233242",
+    "emptyPassword":""
 }
