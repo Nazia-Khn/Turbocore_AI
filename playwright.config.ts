@@ -31,7 +31,6 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless : false
   },
 
   /* Configure projects for major browsers */
@@ -41,7 +40,6 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-<<<<<<< HEAD
    /* {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -52,18 +50,6 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 */
-=======
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
->>>>>>> bd11746b78622a4487011cd8d1bfaa9ace0344cf
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
