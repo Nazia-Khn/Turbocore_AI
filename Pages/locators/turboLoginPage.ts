@@ -7,7 +7,11 @@ export class LoginPage {
   readonly emailInput: Locator;
   readonly continueBtn: Locator;
   readonly PasswordInput: Locator;
-  readonly emailErrorMsg : Locator
+  readonly emailErrorMsg : Locator;
+
+  //SignUp Locators
+  readonly signupLink : Locator ;
+  readonly signupHeader : Locator;
 
   constructor(page: Page) {
     this.page= page
@@ -15,5 +19,9 @@ export class LoginPage {
     this.continueBtn= page.getByText('Continue')
     this.PasswordInput = page.locator('input[id="password"]');
     this.emailErrorMsg = page.locator('div[id="error-cs-username-required"]')
+
+    this.signupLink = page.getByText('Sign up');
+    this.signupHeader = page.getByText('Create Your Account');
+    
   }
 }

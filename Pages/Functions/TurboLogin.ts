@@ -31,4 +31,12 @@ export class TurboLogin {
         await this.loginPage.page.waitForTimeout(5000)
         await expect(this.loginPage.emailErrorMsg).toBeVisible()
     }
+
+    async clickSignUpLink(){
+        await this.loginPage.signupLink.click();
+    }
+    async verifySignUpLink(){
+        await this.loginPage.page.waitForTimeout(5000)
+       await expect(this.loginPage.signupHeader).toBeVisible()
+    }
 }
