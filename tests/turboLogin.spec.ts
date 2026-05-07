@@ -146,5 +146,6 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetLink()
+        await loginPage.EmailErrorMsg()
     })
 })
