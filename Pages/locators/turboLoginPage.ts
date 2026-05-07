@@ -15,6 +15,10 @@ export class LoginPage {
   readonly continueBtn: Locator;
   readonly EditBtn: Locator;
   readonly resetLink: Locator;
+  readonly passwordIconBtn: Locator;
+  readonly OtpvalidationError: Locator;
+  readonly OtpInvalidvalidationError: Locator;
+  readonly OtpInputFill:Locator
   constructor(page: Page) {
     this.page= page
     this.logoVerification = page.locator('header[id="screen-header"]>img')
@@ -28,5 +32,10 @@ export class LoginPage {
     this.continueBtn= page.getByText('Continue') 
     this.EditBtn = page.locator('a[aria-label="Edit email address"]')
     this.resetLink =  page.getByText('Reset password')
+    this.passwordIconBtn = page.locator('button[aria-label="Show password"]')
+    this.OtpvalidationError = page.locator('div[id="error-cs-code-required"]')
+    this.OtpInvalidvalidationError = page.locator('span[id="error-element-code"]')
+    this.OtpInputFill = page.locator('label[id="code-label"]')
+  // Verify Your Identity
   }
 }

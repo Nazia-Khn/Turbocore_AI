@@ -1,9 +1,10 @@
 import { expect } from "@playwright/test";
 import { LoginPage } from "../locators/turboLoginPage";
 
+
+
 export class TurboLogin {
     private loginPage: LoginPage;
-
     constructor(loginPage: LoginPage) {
         this.loginPage = loginPage;
     }
@@ -30,9 +31,19 @@ export class TurboLogin {
         // await this.loginPage.page.waitForTimeout(5000)
         await expect(this.loginPage.headerVerification).toHaveText('Welcome')
     }
-      async ResetLink() {
+    async ResetPassword() {
+
         await this.loginPage.resetLink.click()
         await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+        const emailValue = await this.loginPage.page.locator('#username').inputValue();
+        console.log(emailValue);
+        await expect(this.loginPage.emailInput).toHaveValue(emailValue)
+        await this.loginPage.continueBtn.last().click()
+    }
+    async verifyOTP(OTP: string) {
+        await expect(this.loginPage.headerVerification).toHaveText('Verify Your Identity')
+        await this.loginPage.OtpInputFill.fill(OTP)
+        await this.loginPage.continueBtn.click()
     }
     async assertDashboard() {
         await this.loginPage.page.waitForLoadState();
@@ -52,5 +63,15 @@ export class TurboLogin {
     async InvalidEmailMsg() {
         await expect(this.loginPage.emailInvalidMsg).toBeVisible()
     }
-    
+    async AssertionForOTP(OTP: string) {
+
+        if (OTP.trim() === '') {
+
+            await expect(this.loginPage.OtpvalidationError).toBeVisible()
+
+        } else {
+            await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
+        }
+    }
+
 }
