@@ -70,7 +70,7 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.maxExeedEamil)
         await loginPage.InvalidEmailMsg()
     })
-    test('TC_LP_Verify Edit Email Functionality', async ({ page }) => {
+    test('TC_LP_Verify Edit Email ', async ({ page }) => {
         const loginPage = new TurboLogin(new LoginPage(page))
         await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.specialchars)
@@ -82,4 +82,65 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetLink()
     })
+    test('TC_LP_Verify Show/Hide Password Icon', async ({ page }) => {
+        const loginPage = new TurboLogin(new LoginPage(page))
+        await loginPage.navigateToLogin()
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.ResetLink()
+    })
+test('TC_LP_Verify Valid Email address_OnForgotPasswordPage', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP_Verify with Invalid OTP', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP_Verify OTP with Empty filed', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP_Verify the OTP less than 6 digit code', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+
+test('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP_Verify Resend Button', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP _Go Back Navigation', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
+test('TC_LP_Back to Turbocore button', async ({ page }) => {
+    const loginPage = new TurboLogin(new LoginPage(page))
+    await loginPage.navigateToLogin()
+    await loginPage.emailFill(Data.specialchars)
+    await loginPage.ResetLink()
+})
 })

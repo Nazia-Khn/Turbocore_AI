@@ -27,6 +27,7 @@ export class TurboLogin {
     }
     async EditLink() {
         await this.loginPage.EditBtn.click()
+        // await this.loginPage.page.waitForTimeout(5000)
         await expect(this.loginPage.headerVerification).toHaveText('Welcome')
     }
       async ResetLink() {
