@@ -99,23 +99,17 @@ test.describe("Verifying Login Functionality", async () => {
     })
     //Updated by Nazia
     test('TC_LP_Verify Resend Button', async ({ page }) => {
-        const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
     })
     test('TC_LP _Go Back Navigation', async ({ page }) => {
-         const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
         await loginPage.clickGoBackButton()
     })
     test.only('TC_LP_Back to Turbocore button', async ({ page }) => {
-         const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
