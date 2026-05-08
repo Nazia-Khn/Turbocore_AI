@@ -99,6 +99,22 @@ export class TurboLogin {
        
             await expect(this.loginPage.ToomanyFailedOtp).toHaveText('We are sorry, an error occurred. Please retry after a few minutes.')
     }
+      async verifyResendButton(){
+        await this.loginPage.resendButton.click()
+        await expect(this.loginPage.coderesendMsg).toHaveText('Code has been resent.')
+    }
+      async clickGoBackButton(){
+        await this.loginPage.gobackButton.click();
+        await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+    }
+        async clickBackToTurbocore(){
+         await this.loginPage.backToTurbocore.click()
+        await expect(this.loginPage.logoVerification).toBeVisible()
+    }
+        async verifyPasswordMasking(password: string){
+       await this.loginPage.PasswordInput.fill(password);
+         await expect(this.loginPage.PasswordInput).toHaveAttribute('type', 'password');
+    }
 
 
     
