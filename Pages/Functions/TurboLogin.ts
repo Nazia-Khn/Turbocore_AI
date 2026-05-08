@@ -74,4 +74,19 @@ export class TurboLogin {
         }
     }
 
+    async verifyResendButton(){
+        await this.loginPage.resendButton.click()
+        await expect(this.loginPage.coderesendMsg).toHaveText('Code has been resent.')
+    }
+
+    async clickGoBackButton(){
+        await this.loginPage.gobackButton.click();
+        await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+    }
+
+    async clickBackToTurbocore(){
+         await this.loginPage.backToTurbocore.click()
+        await expect(this.loginPage.logoVerification).toBeVisible()
+    }
+
 }
