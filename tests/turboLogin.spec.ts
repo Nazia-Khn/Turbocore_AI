@@ -59,6 +59,11 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.ResetPassword()
     })
     // ------------------------------------------------
+    test.only('TC_LP_Verify Password Masking', async({ page })=>{
+      await loginPage.emailFill(Data.Email)
+      await loginPage.verifyPasswordMasking(Data.password)  
+    })
+
     test('TC_LP_Verify Show/Hide Password Icon', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetPassword()
@@ -97,7 +102,7 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetLink()
     })
-    //Updated by Nazia
+    
     test('TC_LP_Verify Resend Button', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
@@ -109,7 +114,7 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.verifyResendButton()
         await loginPage.clickGoBackButton()
     })
-    test.only('TC_LP_Back to Turbocore button', async ({ page }) => {
+    test('TC_LP_Back to Turbocore button', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
