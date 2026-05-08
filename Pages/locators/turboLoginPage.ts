@@ -19,6 +19,12 @@ export class LoginPage {
   readonly OtpvalidationError: Locator;
   readonly OtpInvalidvalidationError: Locator;
   readonly OtpInputFill:Locator
+  readonly resendButton:Locator
+  readonly coderesendMsg:Locator
+  readonly gobackButton :Locator
+  readonly backToTurbocore :Locator
+
+
   constructor(page: Page) {
     this.page= page
     this.logoVerification = page.locator('header[id="screen-header"]>img')
@@ -37,5 +43,11 @@ export class LoginPage {
     this.OtpInvalidvalidationError = page.locator('span[id="error-element-code"]')
     this.OtpInputFill = page.locator('label[id="code-label"]')
   // Verify Your Identity
+    this.resendButton = page.getByText('Resend')
+    this.coderesendMsg=page.getByText('Code has been resent.')
+    this.gobackButton = page.getByText('Go back')
+    this.backToTurbocore =  page.getByText('Back to Turbocore')
+
+
   }
 }
