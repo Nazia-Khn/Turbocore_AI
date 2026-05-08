@@ -1,8 +1,6 @@
 import { expect } from "@playwright/test";
 import { LoginPage } from "../locators/turboLoginPage";
 
-
-
 export class TurboLogin {
     private loginPage: LoginPage;
     constructor(loginPage: LoginPage) {
