@@ -24,6 +24,8 @@ export class TurboLogin {
         await this.loginPage.PasswordInput.fill(password);
         await this.loginPage.continueBtn.last().click()
     }
+
+
     async EditLink() {
         await this.loginPage.EditBtn.click()
         // await this.loginPage.page.waitForTimeout(5000)
