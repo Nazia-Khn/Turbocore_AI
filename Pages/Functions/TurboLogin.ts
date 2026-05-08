@@ -1,8 +1,6 @@
 import { expect } from "@playwright/test";
 import { LoginPage } from "../locators/turboLoginPage";
 
-
-
 export class TurboLogin {
     private loginPage: LoginPage;
     constructor(loginPage: LoginPage) {
@@ -80,19 +78,34 @@ export class TurboLogin {
         }
     }
 
-    async verifyResendButton(){
-        await this.loginPage.resendButton.click()
-        await expect(this.loginPage.coderesendMsg).toHaveText('Code has been resent.')
+    async AssertionFoMaxrOTP(maxOtp: string) {
+
+        if (maxOtp.trim() === '') {
+
+            await expect(this.loginPage.OtpvalidationError).toBeVisible()
+
+        } else {
+            await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
+        }
     }
 
-    async clickGoBackButton(){
-        await this.loginPage.gobackButton.click();
-        await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+    async AssertionForMinOTP(minOtp: string) {
+
+        if (minOtp.trim() === '') {
+
+            await expect(this.loginPage.OtpvalidationError).toBeVisible()
+
+        } else {
+            await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
+        }
     }
 
-    async clickBackToTurbocore(){
-         await this.loginPage.backToTurbocore.click()
-        await expect(this.loginPage.logoVerification).toBeVisible()
+
+    async AssertionForMultipleOtpMaxLimit(){
+       
+            await expect(this.loginPage.ToomanyFailedOtp).toHaveText('We are sorry, an error occurred. Please retry after a few minutes.')
     }
 
+
+    
 }
