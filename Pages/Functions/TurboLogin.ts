@@ -80,11 +80,13 @@ export class TurboLogin {
     async clickGoBackButton(){
         await this.loginPage.gobackButton.click();
         await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
-    }
-
+        }
+       
     async clickBackToTurbocore(){
          await this.loginPage.backToTurbocore.click()
         await expect(this.loginPage.logoVerification).toBeVisible()
     }
 
+
+    
 }

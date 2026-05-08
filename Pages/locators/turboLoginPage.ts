@@ -9,7 +9,7 @@ export class LoginPage {
   readonly emailInput: Locator;
   readonly emailErrorMsg : Locator
   readonly emailInvalidMsg : Locator
-  readonly PasswordInput: Locator; 
+  readonly PasswordInput: Locator;
   readonly passwordErrorMsg:Locator
   readonly passwordRequireMsg:Locator
   readonly continueBtn: Locator;
