@@ -1,22 +1,13 @@
 {
-    "Email": "maruthiprasad.pc@gmail.com",
-    "wrongEmail": "maruthiprasad@soais.com",
-    "invalidMail": "maruthiprasad",
-    "password": "Maruthi@1234",
-    "worngPassword": "1233242",
-    "specialchars": "$$$@soais.com",
-    "maxEmailLength": "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADS@gmail.com",
-    "maxExeedEamil": "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADSl@gmail.com",
-    "inValidOTP": "143214",
-    "empty": "",
-    "maxOtp": "12345678",
-    "minOtp": "1234",
-    "multipleOTPmaxLimit": [
-        "111111",
-        "222222",
-        "333333",
-        "777777",
-        "416456",
-        "464876"
-    ]
+    "Email":"maruthiprasad.pc@soais.com",
+    "wrongEmail":"maruthiprasad@soais.com",
+    "invalidMail":"maruthiprasad",
+    "password":"Maruthi@1234",
+    "worngPassword":"1233242",
+    "specialchars":"$$$@soais.com",
+    "maxEmailLength" : "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADS@gmail.com",
+    "maxExeedEamil":"dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADSl@gmail.com",
+    "inValidOTP":"143214",
+     "empty":"",
+     "maxOTp":"12345678"
 }
