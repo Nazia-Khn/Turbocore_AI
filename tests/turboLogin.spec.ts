@@ -59,6 +59,10 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.ResetPassword()
     })
     // ------------------------------------------------
+    test('Verify Password Masking',async ({ page }) => {
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.verifyPasswordMasking(Data.password)
+    })
     test('TC_LP_Verify Show/Hide Password Icon', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetPassword()
