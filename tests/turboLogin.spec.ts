@@ -103,13 +103,13 @@ test.describe("Verifying Login Functionality", async () => {
     test('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
-        const maxLimitOtp=Data.multipleOTPmaxLimit;
-         for (let i = 0; i < maxLimitOtp.length; i++) {
-        await loginPage.verifyOTP(maxLimitOtp[i])
+        const maxLimitOtp = Data.multipleOTPmaxLimit;
+        for (let i = 0; i < maxLimitOtp.length; i++) {
+            await loginPage.verifyOTP(maxLimitOtp[i])
         }
         await loginPage.AssertionForMultipleOtpMaxLimit();
 
-    }) 
+    })
     test('TC_LP_Verify Resend Button', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
