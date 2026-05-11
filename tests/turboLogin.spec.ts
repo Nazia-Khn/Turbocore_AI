@@ -58,6 +58,8 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetPassword()
     })
+    // ------------------------------------------------
+    test('Verify Password Masking ',async ({ page }) => {
     
     // ------------------------------------------------//
 
