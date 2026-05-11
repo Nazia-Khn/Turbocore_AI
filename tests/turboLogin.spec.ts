@@ -79,7 +79,9 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.AssertionForOTP(Data.inValidOTP)
     })
     test('TC_LP_Verify OTP with Empty filed', async ({ page }) => {
-        await loginPage.verifyOTP(Data.inValidOTP)
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.ResetPassword()
+        await loginPage.verifyOTP(Data.empty)
         await loginPage.AssertionForOTP(Data.empty)
     })
     test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
