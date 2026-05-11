@@ -79,43 +79,41 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.AssertionForOTP(Data.empty)
     })
     test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
-        const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
-        await loginPage.emailFill(Data.specialchars)
-        await loginPage.ResetLink()
+        await loginPage.emailFill(Data.Email)
+        await loginPage.ResetPassword()
+        await loginPage.verifyOTP(Data.maxOtp)
+        await loginPage.AssertionForOTP(Data.maxOtp)
     })
     test('TC_LP_Verify the OTP less than 6 digit code', async ({ page }) => {
-        const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
-        await loginPage.emailFill(Data.specialchars)
-        await loginPage.ResetLink()
+        await loginPage.emailFill(Data.Email)
+        await loginPage.ResetPassword()
+        await loginPage.verifyOTP(Data.minOtp)
+        await loginPage.AssertionForOTP(Data.minOtp)
+
     })
 
-    test('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
-        const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
-        await loginPage.emailFill(Data.specialchars)
-        await loginPage.ResetLink()
-    })
-    //Updated by Nazia
+    test.only('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
+        await loginPage.emailFill(Data.Email)
+        await loginPage.ResetPassword()
+        const maxLimitOtp=Data.multipleOTPmaxLimit;
+         for (let i = 0; i < maxLimitOtp.length; i++) {
+        await loginPage.verifyOTP(maxLimitOtp[i])
+        }
+        await loginPage.AssertionForMultipleOtpMaxLimit();
+
+    }) 
     test('TC_LP_Verify Resend Button', async ({ page }) => {
-        const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
     })
     test('TC_LP _Go Back Navigation', async ({ page }) => {
-         const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
         await loginPage.clickGoBackButton()
     })
     test.only('TC_LP_Back to Turbocore button', async ({ page }) => {
-         const loginPage = new TurboLogin(new LoginPage(page))
-        await loginPage.navigateToLogin()
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyResendButton()
