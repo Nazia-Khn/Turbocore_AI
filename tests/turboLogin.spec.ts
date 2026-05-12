@@ -95,6 +95,10 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.ResetPassword()
         await loginPage.verifyOTP(Data.maxOtp)
         await loginPage.AssertionForOTP(Data.maxOtp)
+         await loginPage.emailFill(Data.Email)
+        await loginPage.ResetPassword()
+        await loginPage.verifyOTP(Data.maxOtp)
+        await loginPage.AssertionForOTP(Data.maxOtp)
     })
     test('TC_LP_Verify the OTP less than 6 digit code', async ({ page }) => {
         await loginPage.emailFill(Data.Email)

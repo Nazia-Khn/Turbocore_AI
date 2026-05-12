@@ -71,6 +71,34 @@ export class TurboLogin {
             await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
         }
     }
+    async AssertionFoMaxrOTP(maxOtp: string) {
+ 
+        if (maxOtp.trim() === '') {
+ 
+            await expect(this.loginPage.OtpvalidationError).toBeVisible()
+ 
+        } else {
+            await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
+        }
+    }
+    async AssertionForMinOTP(minOtp: string) {
+ 
+        if (minOtp.trim() === '') {
+ 
+            await expect(this.loginPage.OtpvalidationError).toBeVisible()
+ 
+        } else {
+            await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
+        }
+    }
+ 
+ 
+    async AssertionForMultipleOtpMaxLimit() {
+ 
+        await expect(this.loginPage.ToomanyFailedOtp).toHaveText('We are sorry, an error occurred. Please retry after a few minutes.')
+    }
+ 
+ 
 
     async AssertionFoMaxrOTP(maxOtp: string) {
  
