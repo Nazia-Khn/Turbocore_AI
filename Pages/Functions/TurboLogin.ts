@@ -103,7 +103,7 @@ export class TurboLogin {
         await this.loginPage.resendButton.click()
         await expect(this.loginPage.coderesendMsg).toBeVisible()
     }
-      async clickGoBackButton(){
+    async clickGoBackButton() {
         await this.loginPage.gobackButton.click();
         await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
     }
@@ -111,11 +111,13 @@ export class TurboLogin {
          await this.loginPage.backToTurbocore.click()
         await expect(this.loginPage.logoVerification).toBeVisible()
     }
-        async verifyPasswordMasking(password: string){
-       await this.loginPage.PasswordInput.fill(password);
-         await expect(this.loginPage.PasswordInput).toHaveAttribute('type', 'password');
+    async verifyPasswordMasking(password: string) {
+        await this.loginPage.PasswordInput.fill(password);
+        await expect(this.loginPage.PasswordInput).toHaveAttribute('type', 'password');
     }
 
-
-    
+    async clickContinueButton(otp: string) {
+        await this.loginPage.otpInput.fill(otp);
+        await this.loginPage.continueBtn.last().click()
+    }
 }

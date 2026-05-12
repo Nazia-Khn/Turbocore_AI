@@ -43,6 +43,9 @@ export class LoginPage {
     this.OtpvalidationError = page.locator('div[id="error-cs-code-required"]')
     this.OtpInvalidvalidationError = page.locator('span[id="error-element-code"]')
     this.OtpInputFill = page.locator('label[id="code-label"]')
+    this.otpInput = page.locator('#code')
+
+    this.ToomanyFailedOtp = page.locator('h3[class="error-subtitle"]')
   // Verify Your Identity
     this.resendButton = page.getByText('Resend')
     this.coderesendMsg=page.getByText('Code has been resent.')
