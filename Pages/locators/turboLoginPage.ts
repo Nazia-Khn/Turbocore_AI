@@ -21,6 +21,7 @@ export class LoginPage {
   readonly OtpInputFill:Locator
   readonly resendButton:Locator
   readonly coderesendMsg:Locator
+  readonly ToomanyFailedOtp: Locator 
   readonly gobackButton :Locator
   readonly backToTurbocore :Locator
   readonly ToomanyFailedOtp: Locator
