@@ -73,11 +73,11 @@ export class TurboLogin {
     }
 
     async AssertionFoMaxrOTP(maxOtp: string) {
-
+ 
         if (maxOtp.trim() === '') {
-
+ 
             await expect(this.loginPage.OtpvalidationError).toBeVisible()
-
+ 
         } else {
             await expect(this.loginPage.OtpInvalidvalidationError).toBeVisible()
         }
