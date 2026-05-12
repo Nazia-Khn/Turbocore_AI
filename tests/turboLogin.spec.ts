@@ -58,7 +58,9 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetPassword()
     })
-    // ------------------------------------------------
+    
+    // ------------------------------------------------//
+
     test('Verify Password Masking',async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.verifyPasswordMasking(Data.password)
@@ -79,7 +81,9 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.AssertionForOTP(Data.inValidOTP)
     })
     test('TC_LP_Verify OTP with Empty filed', async ({ page }) => {
-        await loginPage.verifyOTP(Data.inValidOTP)
+        await loginPage.emailFill(Data.specialchars)
+        await loginPage.ResetPassword()
+        await loginPage.verifyOTP(Data.empty)
         await loginPage.AssertionForOTP(Data.empty)
     })
     test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
@@ -99,13 +103,13 @@ test.describe("Verifying Login Functionality", async () => {
     test('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
-        const maxLimitOtp=Data.multipleOTPmaxLimit;
-         for (let i = 0; i < maxLimitOtp.length; i++) {
-        await loginPage.verifyOTP(maxLimitOtp[i])
+        const maxLimitOtp = Data.multipleOTPmaxLimit;
+        for (let i = 0; i < maxLimitOtp.length; i++) {
+            await loginPage.verifyOTP(maxLimitOtp[i])
         }
         await loginPage.AssertionForMultipleOtpMaxLimit();
 
-    }) 
+    })
     test('TC_LP_Verify Resend Button', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()

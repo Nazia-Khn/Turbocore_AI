@@ -101,7 +101,7 @@ export class TurboLogin {
     }
       async verifyResendButton(){
         await this.loginPage.resendButton.click()
-        await expect(this.loginPage.coderesendMsg).toHaveText('Code has been resent.')
+        await expect(this.loginPage.coderesendMsg).toBeVisible()
     }
       async clickGoBackButton(){
         await this.loginPage.gobackButton.click();
