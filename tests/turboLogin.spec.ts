@@ -143,9 +143,9 @@ test.describe("Verifying Login Functionality", async () => {
               const testEmail = `testuser@${serverId}.mailosaur.net`;
                // await page.waitForTimeout(5000);
                await loginPage.emailFill(testEmail)
-               await page.waitForTimeout(5000);
+               await page.waitForTimeout(90000);
                 await loginPage.ResetPassword()
-                console.log('OTP sent to:', testEmail);
+             console.log('OTP sent to:', testEmail);
              const otp = await getOTP(testEmail);
                  console.log('OTP:', otp);
                     await loginPage.clickContinueButton(otp);
