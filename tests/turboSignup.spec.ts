@@ -24,7 +24,7 @@ test.describe("Verifying Sign up Functionality", async () => {
           const testEmail = `testuser@${serverId}.mailosaur.net`;
             await loginPage.navigateToLogin()
            await signupPage.clickSignUpLink()
-            await page.waitForTimeout(5000);
+            // await page.waitForTimeout(5000);
            await loginPage.emailFill(testEmail)
            await page.waitForTimeout(5000);
             console.log('OTP sent to:', testEmail);

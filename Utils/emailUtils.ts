@@ -1,7 +1,7 @@
 import Mailosaur from 'mailosaur';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ path: './.env' });
 
 const apiKey = process.env.MAILOSAUR_API_KEY;
 if (!apiKey) {

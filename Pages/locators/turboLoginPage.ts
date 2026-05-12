@@ -24,7 +24,7 @@ export class LoginPage {
   readonly ToomanyFailedOtp: Locator 
   readonly gobackButton :Locator
   readonly backToTurbocore :Locator
-  readonly ToomanyFailedOtp: Locator
+  
 
   //Added by Nazia
   readonly otpInput :Locator
