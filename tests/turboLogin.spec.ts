@@ -100,7 +100,7 @@ test.describe("Verifying Login Functionality", async () => {
 
     })
 
-    test.only('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
+    test ('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         const maxLimitOtp = Data.multipleOTPmaxLimit;
