@@ -116,6 +116,8 @@ export class TurboLogin {
          await expect(this.loginPage.PasswordInput).toHaveAttribute('type', 'password');
     }
 
-
-    
+    async clickContinueButton(otp: string){
+        await this.loginPage.otpInput.fill(otp);
+        await this.loginPage.continueBtn.last().click()     
+}
 }
