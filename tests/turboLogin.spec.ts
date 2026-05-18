@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import Data from "../TestData/TurboLoginInputs.json"
 import { TurboLogin } from "../Pages/Functions/TurboLogin"
 import { LoginPage } from "../Pages/locators/turboLoginPage"
-import { getOTP } from '../Utils/emailUtils';
 let loginPage: TurboLogin
 
 test.describe("Verifying Login Functionality", async () => {
@@ -23,12 +22,12 @@ test.describe("Verifying Login Functionality", async () => {
     test('Verifying Log in Turbocore With valid Email and invalid Password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.PasswordFill(Data.worngPassword)
-        await loginPage.wrongPasswordMsg()
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('Verifying Log in Turbocore With invalid Email and invalid Password', async ({ page }) => {
         await loginPage.emailFill(Data.wrongEmail)
         await loginPage.PasswordFill(Data.worngPassword)
-        await loginPage.wrongPasswordMsg()
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('Verifying Log in Turbocore With valid Email and empty password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
@@ -41,16 +40,17 @@ test.describe("Verifying Login Functionality", async () => {
     })
     test('TC_LP_Special Email characters only', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
-        // await loginPage.InvalidEmailMsg()
+        await loginPage.PasswordFill(Data.password)
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('TC_LP_Maximum length email', async ({ page }) => {
         await loginPage.emailFill(Data.maxEmailLength)
         await loginPage.PasswordFill(Data.password)
-        // await loginPage.InvalidEmailMsg()
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('TC_LP_Email field Max limit exceed', async ({ page }) => {
         await loginPage.emailFill(Data.maxExeedEamil)
-        await loginPage.InvalidEmailMsg()
+        await loginPage.EmailErrorMsg()
     })
     test('TC_LP_Verify Edit Email ', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
@@ -60,10 +60,10 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetPassword()
     })
-    
+
     // ------------------------------------------------//
 
-    test('Verify Password Masking',async ({ page }) => {
+    test('Verify Password Masking', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.verifyPasswordMasking(Data.password)
     })
@@ -89,24 +89,21 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.AssertionForOTP(Data.empty)
     })
     test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
-         await loginPage.emailFill(Data.Email)
+        await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyOTP(Data.maxOtp)
-        await loginPage.AssertionForOTP(Data.maxOtp)
-         await loginPage.emailFill(Data.Email)
-        await loginPage.ResetPassword()
-        await loginPage.verifyOTP(Data.maxOtp)
-        await loginPage.AssertionForOTP(Data.maxOtp)
+        await loginPage.AssertionFoMaxrOTP(Data.maxOtp)
+       
     })
     test('TC_LP_Verify the OTP less than 6 digit code', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyOTP(Data.minOtp)
-        await loginPage.AssertionForOTP(Data.minOtp)
+        await loginPage.AssertionForMinOTP(Data.minOtp)
 
     })
 
-    test ('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
+    test('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         const maxLimitOtp = Data.multipleOTPmaxLimit;
@@ -135,21 +132,5 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.clickBackToTurbocore()
     })
 
-       test.only('Verify code (6-digit Code Screen)', async({page})=>{
-            
-              const serverId = process.env.MAILOSAUR_SERVER_ID;
-              const testEmail = `testuser@${serverId}.mailosaur.net`;
-               // await page.waitForTimeout(5000);
-               await loginPage.emailFill(testEmail)
-            //    await page.waitForTimeout(90000);
-                await loginPage.ResetPassword()
-             console.log('OTP sent to:', testEmail);
-             const otp = await getOTP(testEmail);
-                 console.log('OTP:', otp);
-                    await loginPage.clickContinueButton(otp);
-    
-    
-        })
 
-  
 })

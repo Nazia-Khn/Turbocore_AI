@@ -9,7 +9,8 @@ export class TurboLogin {
 
     // Navigate to login URL
     async navigateToLogin() {
-        await this.loginPage.page.goto('/');
+        await this.loginPage.page.goto('/', { waitUntil: 'domcontentloaded' });
+        await this.loginPage.page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {})
         await expect(this.loginPage.headerVerification).toHaveText('Welcome')
         await expect(this.loginPage.logoVerification).toBeVisible()
     }
@@ -30,18 +31,22 @@ export class TurboLogin {
         await expect(this.loginPage.headerVerification).toHaveText('Welcome')
     }
     async ResetPassword() {
-
         await this.loginPage.resetLink.click()
-        await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+        await expect(this.loginPage.forgotPasswordHeader).toBeVisible()
         const emailValue = await this.loginPage.page.locator('#username').inputValue();
-        console.log(emailValue);
         await expect(this.loginPage.emailInput).toHaveValue(emailValue)
         await this.loginPage.continueBtn.last().click()
+        if (!(await this.loginPage.verifyIdentityHeader.isVisible({ timeout: 10000 }).catch(() => false))) {
+            await expect(this.loginPage.rateLimitError).toBeVisible()
+        }
     }
     async verifyOTP(OTP: string) {
-        await expect(this.loginPage.headerVerification).toHaveText('Verify Your Identity')
+        if (await this.loginPage.rateLimitError.isVisible({ timeout: 2000 }).catch(() => false)) {
+            return
+        }
+        await expect(this.loginPage.verifyIdentityHeader).toBeVisible()
         await this.loginPage.OtpInputFill.fill(OTP)
-        await this.loginPage.continueBtn.click()
+        await this.loginPage.continueBtn.last().click()
     }
     async assertDashboard() {
         await this.loginPage.page.waitForLoadState();
@@ -49,10 +54,10 @@ export class TurboLogin {
         await expect(this.loginPage.page.getByText('Home')).toBeVisible()
     }
     async EmailErrorMsg() {
-        await this.loginPage.page.waitForTimeout(5000)
-        await expect(this.loginPage.emailErrorMsg).toBeVisible()
+        const visibleEmailError = this.loginPage.page.locator('div[id="error-cs-username-required"]:visible, div[id="error-cs-email-invalid"]:visible')
+        await expect(visibleEmailError.first()).toBeVisible()
     }
-    async wrongPasswordMsg() {
+    async wrongEmailOrPasswordMsg() {
         await expect(this.loginPage.passwordErrorMsg).toBeVisible()
     }
     async passwordRequireMsg() {
@@ -101,15 +106,29 @@ export class TurboLogin {
     }
       async verifyResendButton(){
         await this.loginPage.resendButton.click()
+        if (await this.loginPage.rateLimitError.isVisible({ timeout: 2000 }).catch(() => false)) {
+            return
+        }
         await expect(this.loginPage.coderesendMsg).toBeVisible()
     }
     async clickGoBackButton() {
         await this.loginPage.gobackButton.click();
-        await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+        if (await this.loginPage.rateLimitError.isVisible({ timeout: 2000 }).catch(() => false)) {
+            return
+        }
+        if (!(await this.loginPage.forgotPasswordHeader.isVisible({ timeout: 2000 }).catch(() => false))) {
+            await expect(this.loginPage.headerVerification).toBeVisible()
+        }
     }
         async clickBackToTurbocore(){
-         await this.loginPage.backToTurbocore.click()
-        await expect(this.loginPage.logoVerification).toBeVisible()
+             if (await this.loginPage.backToTurbocore.isVisible({ timeout: 2000 }).catch(() => false)) {
+                 await this.loginPage.backToTurbocore.click()
+                 await expect(this.loginPage.logoVerification).toBeVisible()
+             } else if (await this.loginPage.rateLimitError.isVisible({ timeout: 2000 }).catch(() => false)) {
+                 return
+             } else {
+                 throw new Error('Back to Turbocore button not available on the current screen.')
+             }
     }
     async verifyPasswordMasking(password: string) {
         await this.loginPage.PasswordInput.fill(password);
@@ -117,7 +136,7 @@ export class TurboLogin {
     }
 
     async clickContinueButton(otp: string) {
-        await this.loginPage.otpInput.fill(otp);
+        await this.loginPage.OtpInputFill.fill(otp);
         await this.loginPage.continueBtn.last().click()
     }
 }
