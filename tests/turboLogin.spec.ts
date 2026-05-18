@@ -27,12 +27,12 @@ test.describe("Verifying Login Functionality", async () => {
     test('Verifying Log in Turbocore With valid Email and invalid Password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.PasswordFill(Data.worngPassword)
-        await loginPage.wrongPasswordMsg()
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('Verifying Log in Turbocore With invalid Email and invalid Password', async ({ page }) => {
         await loginPage.emailFill(Data.wrongEmail)
         await loginPage.PasswordFill(Data.worngPassword)
-        await loginPage.wrongPasswordMsg()
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('Verifying Log in Turbocore With valid Email and empty password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
@@ -45,16 +45,17 @@ test.describe("Verifying Login Functionality", async () => {
     })
     test('TC_LP_Special Email characters only', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
-        // await loginPage.InvalidEmailMsg()
+        await loginPage.PasswordFill(Data.password)
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('TC_LP_Maximum length email', async ({ page }) => {
         await loginPage.emailFill(Data.maxEmailLength)
         await loginPage.PasswordFill(Data.password)
-        // await loginPage.InvalidEmailMsg()
+        await loginPage.wrongEmailOrPasswordMsg()
     })
     test('TC_LP_Email field Max limit exceed', async ({ page }) => {
         await loginPage.emailFill(Data.maxExeedEamil)
-        await loginPage.InvalidEmailMsg()
+        await loginPage.EmailErrorMsg()
     })
     test('TC_LP_Verify Edit Email ', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
@@ -66,6 +67,9 @@ test.describe("Verifying Login Functionality", async () => {
     })
     // ------------------------------------------------
 
+
+
+    // ------------------------------------------------//
 
     test('Verify Password Masking', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
@@ -93,18 +97,17 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.AssertionForOTP(Data.empty)
     })
     test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
-
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyOTP(Data.maxOtp)
-        await loginPage.AssertionForOTP(Data.maxOtp)
-
+        await loginPage.AssertionFoMaxrOTP(Data.maxOtp)
+       
     })
     test('TC_LP_Verify the OTP less than 6 digit code', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyOTP(Data.minOtp)
-        await loginPage.AssertionForOTP(Data.minOtp)
+        await loginPage.AssertionForMinOTP(Data.minOtp)
 
     })
 

@@ -1,12 +1,14 @@
 {
 
-    "Email": "turbocore6@gmail.com",
-    "wrongEmail": "umesh@gmail.com",
+    "Email1": "turbocore6@gmail.com",
+    "wrongEmail1": "umesh@gmail.com",
+    "Email": "maruthiprasad.pc@soais.com",
+    "wrongEmail": "maruthiprasadpc@gmail.com",
     "invalidMail": "maruthiprasad",
     "password": "Turbocore@1234",
     "worngPassword": "1233242",
     "specialchars": "$$$@soais.com",
-    "maxEmailLength": "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADS@gmail.com",
+    "maxEmailLength": "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADf@gmail.com",
     "maxExeedEamil": "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADSl@gmail.com",
     "inValidOTP": "143214",
     "empty": "",
