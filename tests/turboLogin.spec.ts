@@ -3,12 +3,17 @@ import dotenv from 'dotenv';
 import Data from "../TestData/TurboLoginInputs.json"
 import { TurboLogin } from "../Pages/Functions/TurboLogin"
 import { LoginPage } from "../Pages/locators/turboLoginPage"
+import { getOTP } from '../Utils/emailUtils';
+dotenv.config();
 let loginPage: TurboLogin
+
 
 test.describe("Verifying Login Functionality", async () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new TurboLogin(new LoginPage(page))
+
         await loginPage.navigateToLogin()
+        await page.waitForTimeout(3000);
     })
     test('Log in Turbocore With valid credentials', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
@@ -60,6 +65,9 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.ResetPassword()
     })
+    // ------------------------------------------------
+
+
 
     // ------------------------------------------------//
 
@@ -130,6 +138,27 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.verifyResendButton()
         await loginPage.clickGoBackButton()
         await loginPage.clickBackToTurbocore()
+    })
+
+    test.only('Verify code (6-digit Code Screen)', async ({ page }) => {
+            test.setTimeout(120000);
+        await loginPage.emailFill(Data.Email)
+     await loginPage.ResetPassword()
+
+       
+    // Fetch OTP from email
+        const otp = await getOTP();
+
+        console.log('Fetched OTP:', otp);
+
+        // Enter OTP and continue
+       await loginPage.clickContinueButton(otp)
+
+        // Validation
+       
+
+
+
     })
 
 

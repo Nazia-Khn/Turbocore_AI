@@ -17,7 +17,8 @@ export class TurboLogin {
 
     // Perform login using locators from POM
     async emailFill(email: string) {
-        await this.loginPage.emailInput.fill(email);
+        // await this.loginPage.page.waitForLoadState('networkidle');
+         await this.loginPage.emailInput.fill(email);
         await this.loginPage.continueBtn.last().click()
     }
     async PasswordFill(password: string) {
@@ -31,6 +32,7 @@ export class TurboLogin {
         await expect(this.loginPage.headerVerification).toHaveText('Welcome')
     }
     async ResetPassword() {
+         
         await this.loginPage.resetLink.click()
         await expect(this.loginPage.forgotPasswordHeader).toBeVisible()
         const emailValue = await this.loginPage.page.locator('#username').inputValue();

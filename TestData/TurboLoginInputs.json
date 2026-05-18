@@ -1,9 +1,11 @@
 {
 
+    "Email1": "turbocore6@gmail.com",
+    "wrongEmail1": "umesh@gmail.com",
     "Email": "maruthiprasad.pc@soais.com",
     "wrongEmail": "maruthiprasadpc@gmail.com",
     "invalidMail": "maruthiprasad",
-    "password": "Maruthi@1234",
+    "password": "Turbocore@1234",
     "worngPassword": "1233242",
     "specialchars": "$$$@soais.com",
     "maxEmailLength": "dwneqp4j32dqwdlpkkkkgvdgfsdgghgadaffaadaffffadaddfadadaqdqASXADf@gmail.com",
@@ -19,5 +21,15 @@
         "777777",
         "416456",
         "464877"
-    ]
+    ],
+    
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "skipLibCheck": true
+  }
 }

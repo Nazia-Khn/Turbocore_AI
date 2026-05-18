@@ -32,7 +32,7 @@ export class LoginPage {
     this.page = page
     this.logoVerification = page.locator('header[id="screen-header"]>img')
     this.headerVerification = page.locator('header[id="screen-header"]>h1')
-    this.emailInput = page.locator('input[id="username"]');
+    this.emailInput = page.locator('input[id="email"]');
     this.emailErrorMsg = page.locator('div[id="error-cs-username-required"]')
     this.emailInvalidMsg = page.locator('div[id="error-cs-email-invalid"]')
     this.emailErrorMsgs = page.locator('div[id="error-cs-username-required"], div[id="error-cs-email-invalid"]')
