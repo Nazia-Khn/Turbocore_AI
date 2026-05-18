@@ -4,12 +4,16 @@ import Data from "../TestData/TurboLoginInputs.json"
 import { TurboLogin } from "../Pages/Functions/TurboLogin"
 import { LoginPage } from "../Pages/locators/turboLoginPage"
 import { getOTP } from '../Utils/emailUtils';
+dotenv.config();
 let loginPage: TurboLogin
+
 
 test.describe("Verifying Login Functionality", async () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new TurboLogin(new LoginPage(page))
+
         await loginPage.navigateToLogin()
+        await page.waitForTimeout(3000);
     })
     test('Log in Turbocore With valid credentials', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
@@ -61,11 +65,9 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.ResetPassword()
     })
     // ------------------------------------------------
-    test('Verify Password Masking ',async ({ page }) => {
-    
-    // ------------------------------------------------//
 
-    test('Verify Password Masking',async ({ page }) => {
+
+    test('Verify Password Masking', async ({ page }) => {
         await loginPage.emailFill(Data.specialchars)
         await loginPage.verifyPasswordMasking(Data.password)
     })
@@ -91,14 +93,12 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.AssertionForOTP(Data.empty)
     })
     test('TC_LP_Verify the OTP more than 6 digit code', async ({ page }) => {
-         await loginPage.emailFill(Data.Email)
+
+        await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         await loginPage.verifyOTP(Data.maxOtp)
         await loginPage.AssertionForOTP(Data.maxOtp)
-         await loginPage.emailFill(Data.Email)
-        await loginPage.ResetPassword()
-        await loginPage.verifyOTP(Data.maxOtp)
-        await loginPage.AssertionForOTP(Data.maxOtp)
+
     })
     test('TC_LP_Verify the OTP less than 6 digit code', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
@@ -108,7 +108,7 @@ test.describe("Verifying Login Functionality", async () => {
 
     })
 
-    test.only('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
+    test('TC_LP_Verify the Error message after entering too many incorrect password', async ({ page }) => {
         await loginPage.emailFill(Data.Email)
         await loginPage.ResetPassword()
         const maxLimitOtp = Data.multipleOTPmaxLimit;
@@ -137,21 +137,26 @@ test.describe("Verifying Login Functionality", async () => {
         await loginPage.clickBackToTurbocore()
     })
 
-       test.only('Verify code (6-digit Code Screen)', async({page})=>{
-            
-              const serverId = process.env.MAILOSAUR_SERVER_ID;
-              const testEmail = `testuser@${serverId}.mailosaur.net`;
-               // await page.waitForTimeout(5000);
-               await loginPage.emailFill(testEmail)
-            //    await page.waitForTimeout(90000);
-                await loginPage.ResetPassword()
-             console.log('OTP sent to:', testEmail);
-             const otp = await getOTP(testEmail);
-                 console.log('OTP:', otp);
-                    await loginPage.clickContinueButton(otp);
-    
-    
-        })
+    test.only('Verify code (6-digit Code Screen)', async ({ page }) => {
+            test.setTimeout(120000);
+        await loginPage.emailFill(Data.Email)
+     await loginPage.ResetPassword()
 
-  
+       
+    // Fetch OTP from email
+        const otp = await getOTP();
+
+        console.log('Fetched OTP:', otp);
+
+        // Enter OTP and continue
+       await loginPage.clickContinueButton(otp)
+
+        // Validation
+       
+
+
+
+    })
+
+
 })

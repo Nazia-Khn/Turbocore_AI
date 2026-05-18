@@ -1,38 +1,81 @@
-import Mailosaur from 'mailosaur';
+import { ImapFlow } from 'imapflow';
+import { simpleParser } from 'mailparser';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: './.env' });
+dotenv.config();
 
-const apiKey = process.env.MAILOSAUR_API_KEY;
-if (!apiKey) {
-    throw new Error('MAILOSAUR_API_KEY environment variable is required');
-}
+export async function getOTP(): Promise<string> {
 
-const mailosaur = new Mailosaur(apiKey);
+    const client = new ImapFlow({
+        host: 'imap.gmail.com',
+        port: 993,
+        secure: true,
 
-export async function getOTP(email: string): Promise<string> {
-
-    const serverId = process.env.MAILOSAUR_SERVER_ID!;
-
-    const message = await mailosaur.messages.get(
-        serverId,
-        {
-            sentTo: email,
+        auth: {
+            user: process.env.EMAIL_USER!,
+            pass: process.env.EMAIL_PASS!,
         },
-        {
-            timeout: 20000
+
+        tls: {
+            rejectUnauthorized: false,
+        },
+    });
+
+    // Connect Gmail
+    await client.connect();
+
+    console.log('Connected to Gmail');
+
+    // Lock inbox
+    let lock = await client.getMailboxLock('INBOX');
+
+    try {
+
+        console.log('Waiting for OTP email...');
+
+        // Wait few seconds
+        await new Promise(resolve => setTimeout(resolve, 10000));
+
+        // Get latest email
+        const messages = client.fetch(
+            '1:*',
+            {
+                envelope: true,
+                source: true,
+            }
+        );
+
+        let latestMessage: any;
+
+        for await (const message of messages) {
+            latestMessage = message;
         }
-    );
 
-    const body = message.text?.body || '';
+        if (!latestMessage) {
+            throw new Error('No emails found');
+        }
 
-    console.log('Email Body:', body);
+        const parsed = await simpleParser(
+            latestMessage.source
+        );
 
-    const otpMatch = body.match(/\d{6}/);
+        const body = parsed.text || '';
 
-    if (!otpMatch) {
-        throw new Error('OTP not found in email');
+        console.log('Email Body:', body);
+
+        // Extract OTP
+        const otpMatch = body.match(/\d{6}/);
+
+        if (!otpMatch) {
+            throw new Error('OTP not found');
+        }
+
+        return otpMatch[0];
+
+    } finally {
+
+        lock.release();
+
+        await client.logout();
     }
-
-    return otpMatch[0];
 }

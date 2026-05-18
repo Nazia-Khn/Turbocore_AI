@@ -16,7 +16,8 @@ export class TurboLogin {
 
     // Perform login using locators from POM
     async emailFill(email: string) {
-        await this.loginPage.emailInput.fill(email);
+        // await this.loginPage.page.waitForLoadState('networkidle');
+         await this.loginPage.emailInput.fill(email);
         await this.loginPage.continueBtn.last().click()
     }
     async PasswordFill(password: string) {
@@ -30,7 +31,7 @@ export class TurboLogin {
         await expect(this.loginPage.headerVerification).toHaveText('Welcome')
     }
     async ResetPassword() {
-
+         
         await this.loginPage.resetLink.click()
         await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
         const emailValue = await this.loginPage.page.locator('#username').inputValue();
@@ -104,6 +105,7 @@ export class TurboLogin {
     async clickGoBackButton() {
         await this.loginPage.gobackButton.click();
         await expect(this.loginPage.headerVerification).toHaveText('Forgot Your Password?')
+      // await expect(this.loginPage.headerVerification).toBeVisible()
     }
     async clickBackToTurbocore() {
         await this.loginPage.backToTurbocore.click()
